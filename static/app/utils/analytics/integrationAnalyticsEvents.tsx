@@ -136,7 +136,6 @@ export const integrationEventMap: Record<IntegrationAnalyticsKey, string> = {
   'integrations.reconfigure_stacktrace_setup':
     'Integrations: Reconfigure Stacktrace Setup',
   'integrations.stacktrace_docs_clicked': 'Integrations: Stacktrace Docs Clicked',
-
   'integrations.serverless_functions_viewed': 'Integrations: Serverless Functions Viewed',
   'integrations.installation_input_value_changed':
     'Integrations: Installation Input Value Changed',
