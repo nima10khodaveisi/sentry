@@ -29,21 +29,6 @@ describe('Filters and Sampling - Transaction rule', function () {
           dynamicSampling: {
             rules: [
               {
-                sampleRate: 0.1,
-                type: 'error',
-                condition: {
-                  op: 'and',
-                  inner: [
-                    {
-                      op: 'glob',
-                      name: 'event.release',
-                      value: ['1*'],
-                    },
-                  ],
-                },
-                id: 39,
-              },
-              {
                 sampleRate: 0.2,
                 type: 'trace',
                 condition: {
@@ -70,21 +55,6 @@ describe('Filters and Sampling - Transaction rule', function () {
         body: TestStubs.Project({
           dynamicSampling: {
             rules: [
-              {
-                sampleRate: 0.1,
-                type: 'error',
-                condition: {
-                  op: 'and',
-                  inner: [
-                    {
-                      op: 'glob',
-                      name: 'event.release',
-                      value: ['1*'],
-                    },
-                  ],
-                },
-                id: 44,
-              },
               {
                 sampleRate: 0.6,
                 type: 'trace',
@@ -114,12 +84,6 @@ describe('Filters and Sampling - Transaction rule', function () {
 
       renderComponent();
 
-      // Error rules container
-      expect(
-        screen.queryByText('There are no error rules to display')
-      ).not.toBeInTheDocument();
-      expect(screen.getByText('Errors only')).toBeInTheDocument();
-
       // Transaction traces and individual transactions rules container
       expect(
         screen.queryByText('There are no transaction rules to display')
@@ -127,8 +91,8 @@ describe('Filters and Sampling - Transaction rule', function () {
       const transactionTraceRules = screen.getByText('Transaction traces');
       expect(transactionTraceRules).toBeInTheDocument();
 
-      const editRuleButtons = screen.getAllByLabelText('Edit Rule');
-      expect(editRuleButtons).toHaveLength(2);
+      const editRuleButtons = screen.getByLabelText('Edit Rule');
+      expect(editRuleButtons).toBeInTheDocument();
 
       // Open rule modal - edit transaction rule
       await renderModal(editRuleButtons[1]);
@@ -199,9 +163,6 @@ describe('Filters and Sampling - Transaction rule', function () {
       await waitForElementToBeRemoved(() =>
         screen.queryByText('Edit Transaction Sampling Rule')
       );
-
-      // Error rules panel is updated
-      expect(screen.getByText('Errors only')).toBeInTheDocument();
 
       expect(screen.getByText('Transaction traces')).toBeInTheDocument();
       expect(screen.getAllByText('Release')).toHaveLength(2);
@@ -651,21 +612,6 @@ describe('Filters and Sampling - Transaction rule', function () {
           dynamicSampling: {
             rules: [
               {
-                sampleRate: 0.1,
-                type: 'error',
-                condition: {
-                  op: 'and',
-                  inner: [
-                    {
-                      op: 'glob',
-                      name: 'event.release',
-                      value: ['1*'],
-                    },
-                  ],
-                },
-                id: 39,
-              },
-              {
                 sampleRate: 0.2,
                 type: 'transaction',
                 condition: {
@@ -692,21 +638,6 @@ describe('Filters and Sampling - Transaction rule', function () {
         body: TestStubs.Project({
           dynamicSampling: {
             rules: [
-              {
-                sampleRate: 0.1,
-                type: 'error',
-                condition: {
-                  op: 'and',
-                  inner: [
-                    {
-                      op: 'glob',
-                      name: 'event.release',
-                      value: ['1*'],
-                    },
-                  ],
-                },
-                id: 44,
-              },
               {
                 sampleRate: 0.6,
                 type: 'transaction',
@@ -736,12 +667,6 @@ describe('Filters and Sampling - Transaction rule', function () {
 
       renderComponent();
 
-      // Error rules container
-      expect(
-        screen.queryByText('There are no error rules to display')
-      ).not.toBeInTheDocument();
-      expect(screen.getByText('Errors only')).toBeInTheDocument();
-
       // Transaction traces and individual transactions rules container
       expect(
         screen.queryByText('There are no transaction rules to display')
@@ -749,8 +674,8 @@ describe('Filters and Sampling - Transaction rule', function () {
       const transactionTraceRules = screen.getByText('Individual transactions');
       expect(transactionTraceRules).toBeInTheDocument();
 
-      const editRuleButtons = screen.getAllByLabelText('Edit Rule');
-      expect(editRuleButtons).toHaveLength(2);
+      const editRuleButtons = screen.getByLabelText('Edit Rule');
+      expect(editRuleButtons).toBeInTheDocument();
 
       // Open rule modal - edit transaction rule
       await renderModal(editRuleButtons[1]);
@@ -819,9 +744,6 @@ describe('Filters and Sampling - Transaction rule', function () {
       await waitForElementToBeRemoved(() =>
         screen.queryByText('Edit Transaction Sampling Rule')
       );
-
-      // Error rules panel is updated
-      expect(screen.getByText('Errors only')).toBeInTheDocument();
 
       expect(screen.getByText('Individual transactions')).toBeInTheDocument();
       expect(screen.getAllByText('Release')).toHaveLength(2);
