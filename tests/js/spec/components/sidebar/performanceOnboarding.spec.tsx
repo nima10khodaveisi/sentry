@@ -124,7 +124,10 @@ describe('Sidebar > Performance Onboarding Checklist', function () {
     const performanceCard = screen.getByTestId('setup_transactions');
 
     userEvent.click(performanceCard);
-    expect(window.open).toHaveBeenCalled();
+    expect(window.open).toHaveBeenCalledWith(
+      'https://docs.sentry.io/product/performance/getting-started/',
+      '_blank'
+    );
     await tick();
   });
 
